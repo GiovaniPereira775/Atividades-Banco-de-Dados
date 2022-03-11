@@ -1,0 +1,35 @@
+CREATE TABLE imovel(
+numero NUMBER(5) PRIMARY KEY,
+area NUMBER(4,2),
+valor NUMBER(10,2),
+endereco VARCHAR2(100) NOT NULL
+);
+
+CREATE TABLE proprietario(
+CPF NUMBER(11) PRIMARY KEY,
+nome VARCHAR2(108) NOT NULL,
+endereco VARCHAR2(100) NOT NULL
+);
+
+CREATE TABLE pertence(
+
+numero imovel NUMBER(5) REFERENCES imovel (numero),
+cpf proprietario NUMBER(11) REFERENCES proprietario (CPF)
+);
+
+CREATE TABLE locatario(
+
+codigo NUMBER(5) PRIMARY KEY,
+nome VARCHAR2(108) NOT NULL,
+endereco VARCHAR2(100) NOT NULL
+);
+
+CREATE TABLE contrato(
+numero NUMBER(5) PRIMARY KEY,
+data DATE,
+total NUMBER(10,2),
+numero imovel NUMBER(5) REFERENCES imovel (numero),
+codigo locatario NUMBER(5) REFERENCES locatario (codigo)
+);
+
+
